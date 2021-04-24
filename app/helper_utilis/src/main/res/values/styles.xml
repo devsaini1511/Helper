@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="TransparentDialog" parent="@android:style/Theme.Panel">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>
