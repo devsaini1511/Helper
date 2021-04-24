@@ -10,8 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+
+/**
+ * Created By Dev Saini
+ **/
 
 
 @SuppressLint("Registered, SourceLockedOrientationActivity")
@@ -20,8 +26,6 @@ public class Base_Activity extends AppCompatActivity {
     public Context context;
     private Dialog dialog;
     private Dialog dialogWithTitle;
-    private int time = 30;
-    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,33 @@ public class Base_Activity extends AppCompatActivity {
         try {
             if (dialog != null && dialog.isShowing()) {
                 dialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showProgressDialogWithTitle(String str_title) {
+        try {
+            dismissProgressDialogWithTitle();
+            dialogWithTitle = new Dialog(Base_Activity.this);
+            View view = LayoutInflater.from(context).inflate(R.layout.layout_custom_progress_dialog_withtitle, null);
+
+            TextView txt_title = view.findViewById(R.id.txt_title);
+            txt_title.setText(str_title);
+
+            dialogWithTitle.setContentView(view);
+            dialogWithTitle.setCancelable(false);
+            dialogWithTitle.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void dismissProgressDialogWithTitle() {
+        try {
+            if (dialogWithTitle != null && dialogWithTitle.isShowing()) {
+                dialogWithTitle.dismiss();
             }
         } catch (Exception e) {
             e.printStackTrace();

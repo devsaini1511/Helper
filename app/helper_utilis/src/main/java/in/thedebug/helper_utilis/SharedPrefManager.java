@@ -6,21 +6,24 @@ import android.content.SharedPreferences;
 import java.util.Set;
 
 
+/**
+ * Created By Dev Saini
+ **/
 
-public class AppPreferenceManager {
 
+public class SharedPrefManager {
 
-    private static AppPreferenceManager instance;
+    private static SharedPrefManager instance;
     private transient SharedPreferences prefs;
 
-    private AppPreferenceManager(Context context) {
+    private SharedPrefManager(Context context) {
         prefs = context.getSharedPreferences(context.getPackageName(),
                 Context.MODE_PRIVATE);
     }
 
-    public static AppPreferenceManager getInstance(Context context) {
+    public static SharedPrefManager getInstance(Context context) {
         if (instance == null)
-            instance = new AppPreferenceManager(context);
+            instance = new SharedPrefManager(context);
         return instance;
     }
 
@@ -37,6 +40,7 @@ public class AppPreferenceManager {
     public void saveBoolean(String key, boolean value) {
         prefs.edit().putBoolean(key, value).apply();
     }
+
     public boolean getBoolean(String key, boolean defValue) {
         return prefs.getBoolean(key, defValue);
     }

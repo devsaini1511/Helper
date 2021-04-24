@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +18,16 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
+/**
+ * Created By Dev Saini
+ **/
 
 @SuppressLint("SourceLockedOrientationActivity")
 public class Base_Fragment extends Fragment {
 
-    String userID;
     Context context;
     private Dialog dialog;
+    private Dialog dialogWithTitle;
 
     @Nullable
     @Override
@@ -70,4 +74,32 @@ public class Base_Fragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    public void showProgressDialogWithTitle(String str_title) {
+        try {
+            dismissProgressDialogWithTitle();
+            dialogWithTitle = new Dialog(context);
+            View view = LayoutInflater.from(context).inflate(R.layout.layout_custom_progress_dialog_withtitle, null);
+
+            TextView txt_title = view.findViewById(R.id.txt_title);
+            txt_title.setText(str_title);
+
+            dialogWithTitle.setContentView(view);
+            dialogWithTitle.setCancelable(false);
+            dialogWithTitle.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void dismissProgressDialogWithTitle() {
+        try {
+            if (dialogWithTitle != null && dialogWithTitle.isShowing()) {
+                dialogWithTitle.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
